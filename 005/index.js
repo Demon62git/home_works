@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {DEFAULT_CITY} from './config.js'
+import { DEFAULT_CITY } from './config.js';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import http from 'http';
