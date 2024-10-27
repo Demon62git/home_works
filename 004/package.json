@@ -1,0 +1,20 @@
+{
+    "name": "edu_backend_26062024",
+    "version": "1.0.0",
+    "description": "netology education",
+    "main": "task-41.js",
+    "type": "module",
+    "bin": {
+      "run-heads-and-tails": "./task-41.js",
+      "run-log-analisis": "./task-42.js"
+    },
+    "scripts": {
+      "run-heads-and-tails": "node ./task-41.js",
+      "run-log-analisis": "node ./task-42.js",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "perpublishOnly": "eslint 'src/**/*.{js,ts}'"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  

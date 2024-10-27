@@ -2,18 +2,20 @@
   "name": "edu_backend_26062024",
   "version": "1.0.0",
   "description": "netology education",
-  "main": "index.js",
+  "main": "task-21.js",
   "bin": {
-    "get-date": "./hw002/task-1.js",
-    "find-num": "./hw002/task-2.js"
+    "get-date": "./task-21.js",
+    "find-num": "./task-22.js"
   },
   "scripts": {
+    "get-date": "node ./task-21.js",
+    "find-num": "node ./task-22.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "perpublishOnly": "eslint 'src/**/*.{js,ts}'"
   },
-  "workspaces": [
-    "hw002"
-  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "yargs": "^17.7.2"
+  }
 }
