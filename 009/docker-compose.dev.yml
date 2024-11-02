@@ -1,0 +1,33 @@
+services:
+  storage:
+    image: redis
+    volumes:
+      - ./data:/data
+    ports:
+      - 3005:6379
+  counter:
+    image: node:22.5
+    working_dir: /app
+    volumes:
+      - ./counter:/app
+    environment:
+      - PORT=3003
+      - REDIS_URL=redis://storage
+    ports:
+      - 8080:3003
+    command: npm run test_docker
+    depends_on:
+      - storage
+  library:
+    image: node:22.5
+    working_dir: /app
+    volumes:
+      - ./library:/app
+    environment:
+      - PORT=3004
+      - COUNTER_URL=http://counter:3003
+    ports:
+      - 80:3004
+    command: npm run test_docker
+    depends_on:
+      - counter

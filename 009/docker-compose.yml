@@ -1,0 +1,23 @@
+services:
+  storage:
+    image: redis
+    volumes:
+      - ./data:/data
+  counter:
+    image: demon62/hw009-views_counter:counter-v1.0.0
+    environment:
+      - PORT=3003
+      - REDIS_URL=redis://storage
+    ports:
+      - 8080:3003
+    depends_on:
+      - storage
+  library:
+    image: demon62/hw009-views_counter:library-v2.0.0
+    environment:
+      - PORT=3004
+      - COUNTER_URL=http://counter:3003
+    ports:
+      - 80:3004
+    depends_on:
+      - counter

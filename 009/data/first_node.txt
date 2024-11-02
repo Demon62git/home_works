@@ -1,1 +1,0 @@
-Hello! From first_node file data!
