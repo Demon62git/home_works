@@ -43,9 +43,9 @@ round-trip min/avg/max = 61.938/80.602/173.705 ms
 ### Выведите на список всех контейнеров - запущенных и остановленных
 - команда: `docker ps -a`
 - Результат:
-|CONTAINER ID|IMAGE|COMMAND|CREATED|STATUS|PORTS|NAMES|
+| CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
 |-|-|-|-|-|-|-|
-|54c36e4b0708|busybox|"ping -c 7 netology.…"|About a minute ago|Exited (0) 59 seconds ago|  |pinger|
+| 54c36e4b0708 | busybox | "ping -c 7 netology.…" | About a minute ago | Exited (0) 59 seconds ago |  | pinger |
 
 ### Выведите на экран логи контейнера с именем pinger
 - команда: `docker logs pinger`
@@ -72,9 +72,9 @@ round-trip min/avg/max = 61.938/80.602/173.705 ms
 ### Выведите на список всех контейнеров - запущенных и остановленных
 - команда: `docker ps -a`
 - Результат:
-|CONTAINER ID|IMAGE|COMMAND|CREATED|STATUS|PORTS|NAMES|
+| CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
 |-|-|-|-|-|-|-|
-|54c36e4b0708|busybox|"ping -c 7 netology.…"|12 minutes ago|Exited (0) 59 seconds ago|  |pinger|
+| 54c36e4b0708 | busybox | "ping -c 7 netology.…" | 12 minutes ago | Exited (0) 59 seconds ago |  | pinger |
 
 ### Выведите на экран логи контейнера с именем pinger
 - команда: `docker logs pinger`
@@ -173,9 +173,9 @@ undefined
 ```
 mynode
 ```
-|CONTAINER ID|   IMAGE|        COMMAND|                  CREATED|          STATUS|                            PORTS|     NAMES|
+| CONTAINER ID |   IMAGE|        COMMAND|                  CREATED|          STATUS|                            PORTS|     NAMES|
 |-|-|-|-|-|-|-| 
-|b13ef898c4ca|   node:15.14|   "docker-entrypoint.s…"|   19 minutes ago|   Exited (137) About a minute ago|             |mynode|
+| b13ef898c4ca |   node:15.14 |   "docker-entrypoint.s…" |   19 minutes ago |   Exited (137) About a minute ago |             | mynode |
 
 
 ### Удалите образ node версии 15.14
@@ -219,9 +219,9 @@ What's next:
 
 - команда: `docker images`
 - Результат:
-|REPOSITORY|TAG|IMAGE ID|CREATED|SIZE|
+| REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
 |-|-|-|-|-|
-|node|15.14|608bba799613|3 years ago|1.38GB|
+| node | 15.14 | 608bba799613 | 3 years ago | 1.38GB |
 
 
 ### Запустите контейнер с именем first_node из образа node версии 15.14 в фоновом режиме, подключив папку data из текущей директории в /var/first/data контейнера
@@ -234,7 +234,7 @@ e6f39b3e60d7e5afce069c2ad7a472cd259af9432c43100afb88cb4b383549b4
 - Результат:
 |CONTAINER ID|   IMAGE|        COMMAND|                  CREATED|              STATUS|              PORTS|     NAMES|
 |-|-|-|-|-|-|-|
-|e6f39b3e60d7|   node:15.14|   "docker-entrypoint.s…"|   About a minute ago|   Up About a minute|        |     first_node|
+|e6f39b3e60d7 |   node:15.14|   "docker-entrypoint.s…"|   About a minute ago|   Up About a minute|        |     first_node|
 
 ### Запустите контейнер с именем second_node из образа node версии 15.14 в фоновом режиме, подключив папку data из текущей директории в /var/second/data контейнера
 - команда: `docker run -d --name second_node -v "%cd%/data":/var/second/data node:15.14 sleep infinity`

@@ -1,0 +1,22 @@
+{
+  "name": "counter",
+  "version": "1.0.0",
+  "description": "counter",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "nodemon -r dotenv/config src/index.js",
+    "test_docker": "nodemon -L",
+    "start_server": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "redis": "^4.7.0"
+  }
+}
