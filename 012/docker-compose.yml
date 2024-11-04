@@ -1,0 +1,37 @@
+services:
+
+  storage:
+    image: redis
+    volumes:
+      - ./data/redis:/data
+
+  counter:
+    image: demon62/hw009-views_counter:counter-v1.0.0
+    ports:
+      - 3005:3003
+    environment:
+      - PORT=3003
+      - REDIS_URL=redis://storage
+    depends_on:
+      - storage
+
+  mongo:
+    image: mongo 
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: library
+    volumes:
+      - ./data/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro 
+
+  library:
+    image: demon62/library:library-v2.0.0
+    ports:
+      - 80:3004
+    environment:
+      - PORT=3004
+      - COUNTER_URL=http://counter:3003
+      - MONGO_URL=mongodb://mongo:27017/library
+    depends_on:
+      - counter
+      - mongo 
