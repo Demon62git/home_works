@@ -1,0 +1,55 @@
+<form method="POST" class="mt-5">
+    <div class="form-group">
+        <label for="inputTitle">Заголовок</label>
+        <input type="text"
+               value="<%= book.title %>"
+               name="title"
+               class="form-control"
+               id="inputTitle">
+    </div>
+
+    <div class="form-group">
+        <label for="inputDesc">Описание</label>
+        <textarea
+                rows="3"
+                name="description"
+                class="form-control"
+                id="inputDesc"
+        ><%= book.description %></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="inputAuthors">Автор</label>
+        <input type="text"
+               value="<%= book.authors %>"
+               name="authors"
+               class="form-control"
+               id="inputAuthors">
+    </div>
+
+    <div class="form-group">
+        <label for="inputFavorite">Рейтинг</label>
+        <div>
+            <input type="radio" id="star5" name="favorite" value="5" <% if (book.favorite == 5) { %> checked <% } %>><label for="star5">5</label>
+            <input type="radio" id="star4" name="favorite" value="4" <% if (book.favorite == 4) { %> checked <% } %>><label for="star4">4</label>
+            <input type="radio" id="star3" name="favorite" value="3" <% if (book.favorite == 3) { %> checked <% } %>><label for="star3">3</label>
+            <input type="radio" id="star2" name="favorite" value="2" <% if (book.favorite == 2) { %> checked <% } %>><label for="star2">2</label>
+            <input type="radio" id="star1" name="favorite" value="1" <% if (book.favorite == 1) { %> checked <% } %>><label for="star1">1</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputAttachFile">Путь к файлу книги</label>
+        <div class="form-group">
+            <input type="file"
+                value="<%= attachFile %>"
+                name="attachFile"
+                class="form-control"
+                id="inputAttachFile">
+        </div>
+    </div>
+
+    <div class="form-group text-right ">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+</form>
