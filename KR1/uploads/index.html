@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат</title>
+</head>
+
+<body>
+    <div>
+        <h3>Авторизация</h3>
+        <form method="POST" action="/api/user/signin">
+            <div>
+                <label for='email'>Логин:</label>
+                <input type="text" name='email' id='email' />
+            </div>
+            <div>
+                <label for='password'>Пароль:</label>
+                <input type='password' name='password' id='password' />
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+
+  <div>
+    <h3>Чат</h3>
+    <div>
+      <label for='receiver'>ID Получателя:</label>
+      <input id="receiver" size="24" />
+    </div>
+    <div>
+      <label for='text'>Сообщение:</label>
+      <input id="text" size="50" />
+    </div>
+    <button id="sendButton">Отправить</button>
+    <button id="getHistory">Загрузить историю</button>
+  </div>
+
+  <div id="messages"></div>
+
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io('/');
+
+    // кнопка "Отправить"
+    document.getElementById('sendButton').onclick = () => {
+      const receiver = document.getElementById('receiver').value;
+      const text = document.getElementById('text').value;
+      socket.emit('sendMessage', {
+        receiver,
+        text
+      });
+    }
+
+    // кнопка "Загрузить историю"
+    document.getElementById('getHistory').onclick = () => {
+      const receiver = document.getElementById('receiver').value;
+      socket.emit('getHistory', {
+        receiver
+      });
+    }
+
+    // новое сообщения от сервера
+    socket.on('newMessage', (message) => {
+      const messagesList = document.getElementById('messages');
+      printMessage(message, messagesList);
+    });
+
+    // история чата от сервера
+    socket.on('chatHistory', (messages) => {
+      const messagesList = document.getElementById('messages');
+      const title = document.createElement('h3');
+      title.textContent = 'История';
+      messagesList.appendChild(title);
+      messages.forEach(message => {
+        printMessage(message, messagesList);
+      });
+    });
+
+    const printMessage = (message, parentElement) => {
+        const messageDiv = document.createElement('div');
+        const author = document.createElement('b');
+        author.textContent = `Отправил: ${message.author}`;
+        const time = document.createElement('ul');
+        time.textContent = new Date(message.sentAt).toLocaleString("ru");
+        const text = document.createElement('ul');
+        text.textContent = message.text;
+        messageDiv.appendChild(author);
+        messageDiv.appendChild(time);
+        messageDiv.appendChild(text);
+        parentElement.appendChild(messageDiv);
+    }
+  </script>
+
+</body>
+
+</html>

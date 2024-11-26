@@ -1,0 +1,25 @@
+services:
+
+  storage_mongo:
+    image: mongo 
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: advertisement
+    volumes:
+      - ./data/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro 
+
+  advertisement:
+    image: node:22.5
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment: 
+      - MONGO_URL=mongodb://storage_mongo:27017/advertisement
+    env_file:
+      - .env  
+    ports: 
+      - 80:3004
+    command: npm run test_docker
+    depends_on: 
+      - storage_mongo 
