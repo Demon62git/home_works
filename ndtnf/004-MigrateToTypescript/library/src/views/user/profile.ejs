@@ -1,0 +1,76 @@
+<%- include('../common/header', { title: title, user: user }) %>
+
+<h1><%= title %></h1>
+
+<div><h3><u><%= message %></u></h3></div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <form method="POST" class="mt-5">
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text"
+                       value="<%= defaults.login %>"
+                       name="login"
+                       class="form-control"
+                       id="login">
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text"
+                       value="<%= defaults.email %>"
+                       name="email"
+                       class="form-control"
+                       id="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="text"
+                       value="<%= defaults.password %>"
+                       name="password"
+                       class="form-control"
+                       id="password">
+            </div>
+
+            <div class="form-group">
+                <label for="firstname">Фамилия</label>
+                <input type="text"
+                       value="<%= defaults.firstname %>"
+                       name="firstname"
+                       class="form-control"
+                       id="firstname">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text"
+                       value="<%= defaults.name %>"
+                       name="name"
+                       class="form-control"
+                       id="name">
+            </div>
+
+            <div class="form-group">
+                <label for="thirdname">Отчество</label>
+                <input type="text"
+                       value="<%= defaults.thirdname %>"
+                       name="thirdname"
+                       class="form-control"
+                       id="thirdname">
+            </div>
+
+            <div class="form-group text-right ">
+                <% if (!user) { %>
+                <button type="submit" class="btn btn-primary">Регистрация</button>
+                <% } else { %>
+                <a href="/view/user/logout" class="btn btn-primary">Выйти</a>
+                <% } %>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<%- include('../common/footer') %>
