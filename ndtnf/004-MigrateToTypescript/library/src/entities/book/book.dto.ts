@@ -1,7 +1,7 @@
 import { IBook } from './book.interface'
 
 export interface PromiseGetBookDto extends IBook {
-    viewsCount: number
+  viewsCount: number
 }
 
 export interface UpdateBookDto {
@@ -11,5 +11,3 @@ export interface UpdateBookDto {
   favorite: IBook['favorite']
   fileCover: IBook['fileCover']
 }
-
-
