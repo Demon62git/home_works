@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Request</title>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <title>Сообщения</title>
+  <style>
+    #messages {
+      height: 200px;
+      overflow-y: scroll;
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    #opponent {
+      text-align : right;
+      color: blue;
+      border: 1px solid black;
+      padding: 10px;
+      display: block;
+    }
+
+    #time {
+      font-size: 10px;
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div>
+    <b>Вход</b>
+    <br>
+    <form method="POST" action="/api/auth/login">
+      <div>
+        <label for='email'>Почта: </label>
+        <input type="text" name='email' id='email' />        
+      </div>
+      <div>
+        <label for='password'>Пароль: </label>
+        <input type='password' name='password' id='password' />
+      </div>
+      <button type="submit">Войти</button>
+    </form>
+  </div>
+  <br>
+
+
+  <br>
+  <div>
+    <div>
+      <h2>Чат</h2>
+    </div>
+
+    <div>
+      <label for='supportRequest'>ID обращения: </label>
+      <input id="supportRequest" size="50" />
+      <button id="subscribeButton">Подписаться</button>
+    </div>
+    
+    <br>
+    <div>
+      <b>История чата</b>
+      <div id="messages"></div>
+    </div>
+
+  <br>
+    <div>
+      <div>
+        <input id="text" placeholder="Текст сообщения" size="50" />
+        <button id="sendButton">Отправить</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const socket = io('/')
+
+    // Подписаться
+    document.getElementById('subscribeButton').onclick = () => {
+      const supportRequest = document.getElementById('supportRequest').value
+      socket.emit('subscribeToSupportRequest', {
+        supportRequest
+      })
+    }
+
+    // Отправить сообщение
+    document.getElementById('sendButton').onclick = () => {
+      const supportRequest = document.getElementById('supportRequest').value
+      const text = document.getElementById('text').value
+      socket.emit('message', {
+        supportRequest,
+        text
+      })
+    }
+
+    // новое сообщения от сервера
+    socket.on('message', (payload) => {
+      const messagesList = document.getElementById('messages')
+      const newMessageItem = document.createElement('div')
+      
+      const newMessageTime = document.createElement('time')
+      const newMessageText = document.createElement('text')
+      // if (payload.author === ) {}
+      newMessageItem.id = 'opponent'
+      newMessageTime.id = 'time'
+      newMessageTime.textContent = `автор: ${payload.message.author.name}, время: ${new Date(payload.message.sentAt).toLocaleString("ru")}`
+      newMessageText.textContent = `${payload.message.text}`
+      newMessageItem.appendChild(newMessageTime)
+      newMessageItem.appendChild(newMessageText)
+
+      messagesList.appendChild(newMessageItem)
+    });
+  </script>
+</body>
+
+</html>
